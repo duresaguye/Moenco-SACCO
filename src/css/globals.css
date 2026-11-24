@@ -1,0 +1,64 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
+@import "./utilities/font-faces.css";
+@import "./utilities/grid.css";
+@import "./utilities/content.css";
+@import "./components/effect.css";
+@import "./components/scroll-reveal.css";
+@import "./components/decoration.css";
+@import "./components/accordion.css";
+
+:root {
+  --menubar-height: 122px;
+}
+
+@theme {
+  --font-instrument-sans: Instrument Sans, sans-serif;
+  --font-noto-ethiopic: var(--font-noto-sans-ethiopic), Instrument Sans, sans-serif;
+  /* Neutral placeholder palette for a financial cooperative — swap for
+     Moenco's official brand colors once supplied. Deep teal/navy reads as
+     stable and trustworthy without the bright "solar" greens of the
+     original template. */
+  --color-primary: #0E6B4F;
+  --color-primary-lighter: #E7F3EE;
+  --color-primary-light: #1F9A72;
+  --color-primary-dark: #084D38;
+  --color-dark: #0B2E3B;
+  --color-darker: #071E27;
+  --color-secondary: #C9992E;
+  --color-body: #4B545D;
+  --color-lighter: #E2E8F0;
+  --color-lightest: #E5E7EB;
+  --color-danger: #BD1F17;
+  --color-danger-lighter: #FEEBED;
+  --color-danger-light: #FF9B9B;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: var(--color-white);
+  font-family: var(--font-instrument-sans), sans-serif;
+}
+
+/* Amharic copy gets a dedicated Ethiopic-compatible typeface with more
+   generous line-height, applied whenever the locale toggle is set to
+   Amharic (see src/i18n/locale-context.tsx). */
+html.font-amharic body {
+  font-family: var(--font-noto-ethiopic), var(--font-instrument-sans), sans-serif;
+}
+
+html.font-amharic p,
+html.font-amharic li,
+html.font-amharic blockquote {
+  line-height: 1.9;
+}
+
+html.font-amharic h1,
+html.font-amharic h2,
+html.font-amharic h3,
+html.font-amharic h4,
+html.font-amharic h5,
+html.font-amharic h6 {
+  line-height: 1.5;
+}
