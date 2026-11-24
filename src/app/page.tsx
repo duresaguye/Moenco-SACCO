@@ -3,10 +3,13 @@ import Hero from "@/components/sections/hero";
 import Why from "@/components/sections/why";
 import Services from "@/components/sections/services";
 import ServicesFeatured from "@/components/sections/services-featured";
-import Testimonials from "@/components/sections/testimonials";
-import Cta from "@/components/sections/cta";
-import Blog from "@/components/sections/blog";
+import CalculatorPreview from "@/components/sections/calculator-preview";
 import HowItWorks from "@/components/sections/how-it-works";
+import WhyCards from "@/components/sections/why-cards";
+import MobileAppPromo from "@/components/sections/mobile-app-promo";
+import NewsPreview from "@/components/sections/news-preview";
+import FaqPreview from "@/components/sections/faq-preview";
+import Cta from "@/components/sections/cta";
 
 export default function Home() {
   return (
@@ -14,12 +17,15 @@ export default function Home() {
       <Hero />
       <main className="relative flex flex-col overflow-x-hidden">
         <Why />
-        <Services />
         <ServicesFeatured />
+        <Services />
+        <CalculatorPreview />
         <HowItWorks />
-        <Testimonials />
+        <WhyCards />
+        <MobileAppPromo compact />
+        <NewsPreview />
+        <FaqPreview />
         <Cta />
-        <Blog />
       </main>
     </React.Fragment>
   );

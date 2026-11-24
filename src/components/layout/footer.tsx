@@ -1,6 +1,5 @@
 "use client";
 
-import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
@@ -47,9 +46,12 @@ export default function Footer({ className }: FooterProps) {
     },
   ];
 
+  // Branch addresses and the general phone line aren't confirmed yet — rather than
+  // showing the raw "To confirm" placeholder as if it were real data, link to the
+  // Contact page and lead with what's actually known (the head office's name).
   const CONTACT_INFO = [
-    { icon: Location, label: t(headOffice.address), href: "#" },
-    { icon: CallAlt, label: CONTACT.phone, href: CONTACT.phone === "To confirm" ? "#" : `tel:${CONTACT.phone}` },
+    { icon: Location, label: t(headOffice.name), href: "/contact" },
+    ...(CONTACT.phone !== "To confirm" ? [{ icon: CallAlt, label: CONTACT.phone, href: `tel:${CONTACT.phone}` }] : []),
     { icon: Mail, label: CONTACT.email, href: `mailto:${CONTACT.email}` },
   ];
 

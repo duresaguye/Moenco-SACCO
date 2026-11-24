@@ -1,32 +1,34 @@
 "use client";
 import React from "react"
 import { cn } from "@/lib/utils";
-import type { ReactNode } from "react";
-import Image from "next/image";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import pageHeaderBg from "@/images/page-header-bg.jpg";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { useLocale, type Bi } from "@/i18n/locale-context";
 
 interface BreadcrumbItemData {
-    label: ReactNode;
+    label: string | Bi;
     href?: string;
 }
 
 interface PageHeaderProps {
-    heading: string;
+    heading: string | Bi;
     breadcrumb?: BreadcrumbItemData[];
     className?: string;
     smallerHeading?: boolean;
 }
 
+function isBi(value: string | Bi): value is Bi {
+    return typeof value === "object" && value !== null && "en" in value;
+}
+
 export default function PageHeader({ heading, smallerHeading = false, breadcrumb = [], className }: PageHeaderProps) {
+    const { t } = useLocale();
+    const resolve = (value: string | Bi) => (isBi(value) ? t(value) : value);
+
     return (
-        <header className={cn("relative flex flex-col pt-(--menubar-height)", className)}>
-            <div className="absolute inset-0 overflow-hidden -z-10 bg-darker">
-                <Image src={pageHeaderBg} width={1920} height={936} placeholder="blur" alt="" className="object-cover object-top w-full h-full parallax-bg" />
-                <div className="absolute inset-0 bg-darker/63" />
-            </div>
-            <div className="relative py-12 lg:py-20 xl:py-28">
+        <header className={cn("relative flex flex-col pt-(--menubar-height) bg-darker", className)}>
+            <div className="absolute inset-0 overflow-hidden -z-10 bg-linear-to-br from-darker via-dark to-primary-dark/60" />
+            <div className="relative py-12 lg:py-20 xl:py-24">
                 <div className="container">
                     <ScrollReveal stagger className="flex flex-col items-center justify-center gap-4">
                         <div className="reveal-item reveal-delay-100">
@@ -37,10 +39,10 @@ export default function PageHeader({ heading, smallerHeading = false, breadcrumb
                                             <BreadcrumbItem>
                                                 {item.href ? (
                                                     <BreadcrumbLink render={<a href={item.href} />}>
-                                                        {item.label}
+                                                        {resolve(item.label)}
                                                     </BreadcrumbLink>
                                                 ) : (
-                                                    <BreadcrumbPage>{item.label}</BreadcrumbPage>
+                                                    <BreadcrumbPage>{resolve(item.label)}</BreadcrumbPage>
                                                 )}
                                             </BreadcrumbItem>
 
@@ -51,7 +53,7 @@ export default function PageHeader({ heading, smallerHeading = false, breadcrumb
                             </Breadcrumb>
                         </div>
                         <h2 className={cn("reveal-item reveal-delay-200 text-3xl font-bold text-center text-white md:text-4xl lg:text-5xl leading-[1.1]", smallerHeading ? "" : "xl:text-6xl 2xl:text-[5rem]")}>
-                            {heading}
+                            {resolve(heading)}
                         </h2>
                     </ScrollReveal>
                 </div>

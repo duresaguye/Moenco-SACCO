@@ -1,16 +1,14 @@
 "use client";
 
-import Image from "next/image";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Section, SectionContent } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
-
-import serviceLargeA from "@/images/service-large-a.jpg";
-import serviceLargeB from "@/images/service-large-b.jpg";
-
-import iconHome from "@/images/icon-house.svg";
-import iconPlane from "@/images/icon-plane.svg";
+import { WalletSaving, Coins } from "@/components/icons";
+import { useLocale } from "@/i18n/locale-context";
+import { DICT } from "@/i18n/dictionary";
+import { SAVINGS_RULES, SHARES, MEMBERSHIP_FEES } from "@/config/sacco-config";
 
 type ServicesFeaturedProps = {
   gap?: "default" | "top" | "bottom" | "none";
@@ -18,63 +16,83 @@ type ServicesFeaturedProps = {
 };
 
 export default function ServicesFeatured({ gap = "default", className }: ServicesFeaturedProps) {
+  const { t, locale } = useLocale();
+
   return (
     <Section gap={gap} className={cn("bg-white", className)}>
       <SectionContent>
         <div className="container">
           <div className="justify-between xl:flex-row-reverse row items-center gy-8">
             <div className="xl:column-6">
-              <ScrollReveal delay={300}>
-                <Image className="w-full rounded-2xl max-xl:max-h-130 border-b-4 border-primary" src={serviceLargeA} alt="" />
+              <ScrollReveal delay={300} className="bg-primary-lighter rounded-2xl p-10 xl:p-14 h-full flex flex-col justify-center">
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="bg-white rounded-xl p-6 border-b-4 border-primary">
+                    <div className="text-3xl font-bold text-primary mb-1">{SAVINGS_RULES.nonManagement.minPercentOfSalary}–{SAVINGS_RULES.nonManagement.maxPercentOfSalary}%</div>
+                    <div className="text-sm text-body">{locale === "am" ? "ከደመወዝ ቁጠባ" : "of salary saved"}</div>
+                  </div>
+                  <div className="bg-white rounded-xl p-6 border-b-4 border-secondary">
+                    <div className="text-3xl font-bold text-secondary mb-1">+{SAVINGS_RULES.management.annualIncreasePercent}%</div>
+                    <div className="text-sm text-body">{locale === "am" ? "ዓመታዊ ጭማሪ (አመራር)" : "annual increase (management)"}</div>
+                  </div>
+                  <div className="bg-white rounded-xl p-6 border-b-4 border-primary">
+                    <div className="text-3xl font-bold text-primary mb-1">{MEMBERSHIP_FEES.pricePerShare.value.toLocaleString()}</div>
+                    <div className="text-sm text-body">{locale === "am" ? "ብር በድርሻ" : "ETB per share"}</div>
+                  </div>
+                  <div className="bg-white rounded-xl p-6 border-b-4 border-secondary">
+                    <div className="text-3xl font-bold text-secondary mb-1">{MEMBERSHIP_FEES.minimumShares.value}+</div>
+                    <div className="text-sm text-body">{locale === "am" ? "ዝቅተኛ ድርሻ" : "shares minimum"}</div>
+                  </div>
+                </div>
               </ScrollReveal>
-            </div>{/* Column */}
+            </div>
             <div className="xl:column-6">
               <ScrollReveal delay={100} className="text-block xl:pe-15">
                 <div className="rounded-full bg-primary/16 size-15 xl:size-18 flex justify-center items-center mb-6">
-                  <Image className="size-8 xl:size-10" src={iconHome} alt="" />
+                  <WalletSaving className="size-8 xl:size-10 fill-primary" />
                 </div>
-                <h2 className="text-darker font-bold text-3xl lg:text-4xl xl:text-5xl leading-[1.166] mb-5">Save money for your business with solar</h2>
-                <p className="text-base xl:text-lg leading-relaxed text-body mb-2.5">Energy consumption is one of the largest uncontrollable expenses for modern enterprises. Rising utility rates directly threaten your company's bottom line.</p>
-                <ul className="flex flex-col gap-2.5 text-base/relaxed">
-                  <li className="relative ps-5.5 before:absolute before:size-2.25 before:rounded-full before:bg-primary before:inset-s-0 before:top-2">
-                    <strong className="font-medium">Massive Overhead Reduction:</strong>
-                    Drastically lower your daily operational expenses. Most commercial properties see a drop of 40% to 70% in monthly grid reliance from day one.
-                  </li>
-                  <li className="relative ps-5.5 before:absolute before:size-2.25 before:rounded-full before:bg-primary before:inset-s-0 before:top-2">
-                    <strong className="font-medium">Rapid Investment Payback (Fast ROI):</strong>
-                    Thanks to accelerated depreciation benefits and high commercial energy consumption during peak solar hours
-                  </li>
-                </ul>
+                <h2 className="text-darker font-bold text-3xl lg:text-4xl xl:text-5xl leading-[1.166] mb-5">
+                  {locale === "am" ? "ቁጠባ የእርስዎ ልማድ ይሁን" : "Savings that build your future"}
+                </h2>
+                <p className="text-base xl:text-lg leading-relaxed text-body mb-2.5">{t(SAVINGS_RULES.nonManagement.description)}</p>
+                <p className="text-base xl:text-lg leading-relaxed text-body">{t(SAVINGS_RULES.management.description)}</p>
                 <div className="pt-7 xl:pt-11">
-                  <Button className="uppercase" size="lg">Get Free Quote</Button>
+                  <Button nativeButton={false} render={<Link href="/savings" />} className="uppercase" size="lg">{t(DICT.cta.learnMore)}</Button>
                 </div>
               </ScrollReveal>
-            </div>{/* Column */}
-          </div>{/* Row */}
-        </div>{/* Container */}
+            </div>
+          </div>
+        </div>
       </SectionContent>
       <SectionContent gap="large">
         <div className="container">
           <div className="justify-between items-center row gy-8">
             <div className="xl:column-6">
-              <ScrollReveal delay={100}>
-                <Image className="w-full rounded-2xl max-xl:max-h-130 border-b-4 border-primary" src={serviceLargeB} alt="" />
+              <ScrollReveal delay={100} className="bg-darker rounded-2xl p-10 xl:p-14 h-full flex flex-col justify-center text-white">
+                <Coins className="size-10 fill-secondary mb-6" />
+                <blockquote className="text-xl xl:text-2xl leading-snug mb-4">{t(SHARES.dividendBasis)}</blockquote>
+                <p className="text-sm text-white/60">{locale === "am" ? "ድርሻ ሊወጣ አይችልም፤ ባለቤትነት ብቻ ነው የሚተላለፈው።" : "Shares are not withdrawable — ownership is held for the life of your membership."}</p>
               </ScrollReveal>
-            </div>{/* Column */}
+            </div>
             <div className="xl:column-6">
               <ScrollReveal delay={300} className="text-block xl:ps-15">
                 <div className="rounded-full bg-primary/16 size-15 xl:size-18 flex justify-center items-center mb-6">
-                  <Image className="size-8 xl:size-10" src={iconPlane} alt="" />
+                  <Coins className="size-8 xl:size-10 fill-primary" />
                 </div>
-                <h2 className="text-darker font-bold text-3xl lg:text-4xl xl:text-5xl leading-[1.166] mb-5">Power your home with wind energy</h2>
-                <p className="text-base xl:text-lg leading-relaxed text-body">While solar panels work wonders during the day, the wind never stops blowing. Integrating a residential wind turbine into your property is a revolutionary way to achieve 100% green energy independence. Modern, sleek, and engineered to be virtually silent, these compact wind turbines capture local breeze patterns and instantly convert them into clean electricity for your household. </p>
+                <h2 className="text-darker font-bold text-3xl lg:text-4xl xl:text-5xl leading-[1.166] mb-5">
+                  {locale === "am" ? "ድርሻ ባለቤትነትና ትርፍ ድርሻ" : "Share ownership & dividends"}
+                </h2>
+                <p className="text-base xl:text-lg leading-relaxed text-body">
+                  {locale === "am"
+                    ? `እያንዳንዱ አባል ቢያንስ ${MEMBERSHIP_FEES.minimumShares.value} ድርሻዎች በ${MEMBERSHIP_FEES.pricePerShare.value.toLocaleString()} ብር ይገዛል፣ ይህም የማህበሩ ባለቤትነት ድርሻ ይሰጣል። ትርፍ ድርሻ በየዓመቱ በጠቅላላ ጉባኤ ተወስኖ ይከፈላል።`
+                    : `Every member purchases at least ${MEMBERSHIP_FEES.minimumShares.value} shares at ${MEMBERSHIP_FEES.pricePerShare.value.toLocaleString()} ETB each, giving you a real ownership stake in the cooperative. Dividends are declared annually by the General Assembly.`}
+                </p>
                 <div className="pt-7 xl:pt-11">
-                  <Button className="uppercase" size="lg">Get Free Quote</Button>
+                  <Button nativeButton={false} render={<Link href="/savings#shares" />} className="uppercase" size="lg" variant="outline-dark">{t(DICT.cta.learnMore)}</Button>
                 </div>
               </ScrollReveal>
-            </div>{/* Column */}
-          </div>{/* Row */}
-        </div>{/* Container */}
+            </div>
+          </div>
+        </div>
       </SectionContent>
     </Section>
   );

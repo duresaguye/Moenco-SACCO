@@ -30,15 +30,15 @@ function buildNavItems(t: (text: Bi) => string): NavItem[] {
     { label: t(DICT.nav.home), href: "/" },
     { label: t(DICT.nav.about), href: "/about" },
     { label: t(DICT.nav.membership), href: "/membership" },
-    { label: t(DICT.nav.savings), href: "/savings" },
     {
-      label: t(DICT.nav.loans),
+      label: t(DICT.nav.savingsLoans),
       children: [
+        { label: t(DICT.nav.savings), href: "/savings" },
         { label: t(DICT.nav.loanProducts), href: "/loans" },
         { label: t(DICT.nav.loanCalculator), href: "/loan-calculator" },
       ],
     },
-    { label: t(DICT.nav.news), href: "/news" },
+    { label: t(DICT.nav.newsShort), href: "/news" },
     {
       label: t(DICT.nav.resources),
       children: [
@@ -56,8 +56,8 @@ const linkStyle = cva(
   {
     variants: {
       active: {
-        true: "text-primary",
-        false: "text-white hover:text-primary"
+        true: "text-primary-light bg-white/10",
+        false: "text-white hover:text-primary-light"
       }
     }
   }
@@ -66,8 +66,8 @@ const linkStyle = cva(
 const subLinkStyle = cva("flex items-center gap-3 rounded-lg px-3.5 py-2.5 text-sm font-medium transition-all duration-200", {
   variants: {
     active: {
-      true: "text-primary",
-      false: "text-white hover:text-primary hover:ps-4"
+      true: "text-primary-light bg-white/5",
+      false: "text-white hover:text-primary-light hover:ps-4"
     }
   }
 });
@@ -92,7 +92,11 @@ const isDropdownActive = (items: DropdownChild[], pathname: string): boolean => 
   });
 };
 
-const breakpoint_lg = "992px";
+// The nav has 6 top-level items plus dropdowns, a language toggle and a CTA button.
+// That only has room to sit on one line once the page container reaches its
+// widest step (Tailwind's 2xl / 1400px) — below that it collapses into the
+// hamburger drawer instead of wrapping or overlapping.
+const desktopBreakpoint = "1400px";
 
 function ChevronDown({ open, className = "" }: { open: boolean; className?: string }) {
   return (
@@ -118,7 +122,7 @@ function NestedSubmenu({ label, icon, items, onNavigate, align = "right" }: Nest
   /* close on outside click (desktop) */
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (typeof window !== "undefined" && window.innerWidth < parseInt(breakpoint_lg)) return;
+      if (typeof window !== "undefined" && window.innerWidth < parseInt(desktopBreakpoint)) return;
       if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
     };
     document.addEventListener("mousedown", handler);
@@ -126,13 +130,13 @@ function NestedSubmenu({ label, icon, items, onNavigate, align = "right" }: Nest
   }, []);
 
   const handleMouseEnter = () => {
-    if (typeof window !== "undefined" && window.innerWidth >= parseInt(breakpoint_lg)) {
+    if (typeof window !== "undefined" && window.innerWidth >= parseInt(desktopBreakpoint)) {
       setOpen(true);
     }
   };
 
   const handleMouseLeave = () => {
-    if (typeof window !== "undefined" && window.innerWidth >= parseInt(breakpoint_lg)) {
+    if (typeof window !== "undefined" && window.innerWidth >= parseInt(desktopBreakpoint)) {
       setOpen(false);
     }
   };
@@ -141,7 +145,7 @@ function NestedSubmenu({ label, icon, items, onNavigate, align = "right" }: Nest
 
   /* Only pre-open mobile accordion if child is active; keep closed on desktop */
   useEffect(() => {
-    if (typeof window !== "undefined" && window.innerWidth < parseInt(breakpoint_lg)) {
+    if (typeof window !== "undefined" && window.innerWidth < parseInt(desktopBreakpoint)) {
       setOpen(active);
     } else {
       setOpen(false);
@@ -149,7 +153,7 @@ function NestedSubmenu({ label, icon, items, onNavigate, align = "right" }: Nest
   }, [active, pathname]);
 
 
-  const desktopStyle = cva("hidden lg:block absolute top-0 w-48 transition-all duration-250", {
+  const desktopStyle = cva("hidden 2xl:block absolute top-0 w-48 transition-all duration-250", {
     variants: {
       open: {
         true: "opacity-100 scale-100 translate-x-0 pointer-events-auto",
@@ -174,7 +178,7 @@ function NestedSubmenu({ label, icon, items, onNavigate, align = "right" }: Nest
     ]
   });
 
-  const mobileStyle = cva("lg:hidden overflow-hidden transition-all duration-300 ease-in-out", {
+  const mobileStyle = cva("2xl:hidden overflow-hidden transition-all duration-300 ease-in-out", {
     variants: {
       open: {
         true: "max-h-125 opacity-100",
@@ -190,7 +194,7 @@ function NestedSubmenu({ label, icon, items, onNavigate, align = "right" }: Nest
         <span className="flex items-center gap-3">
           {label}
         </span>
-        <ChevronDown open={open} className={`h-3.5 w-3.5 ${open ? "rotate-180 lg:rotate-90" : "rotate-0 " + (align === "right" ? "lg:rotate-90" : "lg:-rotate-90")}`} />
+        <ChevronDown open={open} className={`h-3.5 w-3.5 ${open ? "rotate-180 2xl:rotate-90" : "rotate-0 " + (align === "right" ? "2xl:rotate-90" : "2xl:-rotate-90")}`} />
       </a>
 
       {/* ── Desktop: Submenu flying out to the left/right ── */}
@@ -246,7 +250,7 @@ function DropdownItem({ label, items, onNavigate, align = "left" }: DropdownItem
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       // Only close on outside click in desktop view
-      if (typeof window !== "undefined" && window.innerWidth < parseInt(breakpoint_lg)) {
+      if (typeof window !== "undefined" && window.innerWidth < parseInt(desktopBreakpoint)) {
         return;
       }
       if (ref.current && !ref.current.contains(e.target as Node)) {
@@ -258,13 +262,13 @@ function DropdownItem({ label, items, onNavigate, align = "left" }: DropdownItem
   }, []);
 
   const handleMouseEnter = () => {
-    if (typeof window !== "undefined" && window.innerWidth >= parseInt(breakpoint_lg)) {
+    if (typeof window !== "undefined" && window.innerWidth >= parseInt(desktopBreakpoint)) {
       setOpen(true);
     }
   };
 
   const handleMouseLeave = () => {
-    if (typeof window !== "undefined" && window.innerWidth >= parseInt(breakpoint_lg)) {
+    if (typeof window !== "undefined" && window.innerWidth >= parseInt(desktopBreakpoint)) {
       setOpen(false);
     }
   };
@@ -273,14 +277,14 @@ function DropdownItem({ label, items, onNavigate, align = "left" }: DropdownItem
 
   /* Only pre-open mobile accordion if child is active; keep closed on desktop */
   useEffect(() => {
-    if (typeof window !== "undefined" && window.innerWidth < parseInt(breakpoint_lg)) {
+    if (typeof window !== "undefined" && window.innerWidth < parseInt(desktopBreakpoint)) {
       setOpen(active);
     } else {
       setOpen(false);
     }
   }, [active, pathname]);
 
-  const desktopStyle = cva("hidden lg:block absolute top-full w-50 pt-3 transition-all duration-250", {
+  const desktopStyle = cva("hidden 2xl:block absolute top-full w-50 pt-3 transition-all duration-250", {
     variants: {
       open: {
         true: "opacity-100 scale-100 translate-y-0 pointer-events-auto",
@@ -293,7 +297,7 @@ function DropdownItem({ label, items, onNavigate, align = "left" }: DropdownItem
     },
   });
 
-  const mobileStyle = cva("lg:hidden overflow-hidden transition-all duration-300 ease-in-out", {
+  const mobileStyle = cva("2xl:hidden overflow-hidden transition-all duration-300 ease-in-out", {
     variants: {
       open: {
         true: "max-h-125 opacity-100",
@@ -306,8 +310,8 @@ function DropdownItem({ label, items, onNavigate, align = "left" }: DropdownItem
     <li ref={ref} className="relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       {/* Trigger button */}
       <a href="#" type="button" onClick={() => setOpen((v) => !v)} className={linkStyle({ active: active || open })} aria-expanded={open} aria-haspopup="true" >
-        <span className="flex-1 text-start lg:text-center">{label}</span>
-        <ChevronDown open={open} className="h-4 w-4 lg:h-3.5 lg:w-3.5" />
+        <span className="flex-1 text-start 2xl:text-center">{label}</span>
+        <ChevronDown open={open} className="h-4 w-4 2xl:h-3.5 2xl:w-3.5" />
       </a>
 
       {/* ── Desktop: floating flyout ── */}
@@ -386,7 +390,7 @@ function NavContent({ items, onNavigate, className }: { items: NavItem[]; onNavi
 function HamBurgerIcon({ open, setOpen, className }: { open: boolean; setOpen: (v: boolean) => void; className?: string }) {
   return (
     <button type="button" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} onClick={() => setOpen(!open)}
-      className={cn("relative z-50 flex lg:hidden h-11 w-11 flex-col items-center justify-center gap-1.25 rounded-full transition-colors duration-200 bg-white/10", className)} >
+      className={cn("relative z-50 flex 2xl:hidden h-11 w-11 flex-col items-center justify-center gap-1.25 rounded-full transition-colors duration-200 bg-white/10", className)} >
       <span className={`block h-0.5 w-5 rounded-full bg-white transition-all duration-300 origin-center ${open ? "translate-y-1.75 rotate-45" : ""}`} />
       <span className={`block h-0.5 w-5 rounded-full bg-white transition-all duration-300 ${open ? "scale-x-0 opacity-0" : ""}`} />
       <span className={`block h-0.5 w-5 rounded-full bg-white transition-all duration-300 origin-center ${open ? "-translate-y-1.75 -rotate-45" : ""}`} />
@@ -422,7 +426,7 @@ export default function Menubar() {
   useSetHeightRoot(menubarRef, '--menubar-height');
 
   const menuBarWrapStyle = cva(
-    "border flex items-center rounded-full transition-all linear min-[1470px]:-mx-10 mx-auto",
+    "border flex items-center rounded-2xl transition-all linear min-[1470px]:-mx-10 mx-auto",
     {
       variants: {
         scrolled: {
@@ -434,7 +438,7 @@ export default function Menubar() {
   )
 
   const drawerStyle = cva(
-    "fixed top-0 start-0 z-60 flex h-full w-70 max-w-[85vw] flex-col bg-darker/90 backdrop-blur-2xl transition-transform duration-300 ease-in-out lg:hidden",
+    "fixed top-0 start-0 z-60 flex h-full w-70 max-w-[85vw] flex-col bg-darker/90 backdrop-blur-2xl transition-transform duration-300 ease-in-out 2xl:hidden",
     {
       variants: {
         open: {
@@ -461,8 +465,8 @@ export default function Menubar() {
                 <span className="text-white font-bold text-base">{t(ORG.shortName)}</span>
               </span>
             </Link>
-            <nav className="items-center hidden w-full gap-4 lg:flex" >
-              <NavContent items={navItems} className="flex items-center gap-1 mx-auto lg:gap-1.5" onNavigate={closeMobile} />
+            <nav className="items-center hidden w-full gap-4 2xl:flex" >
+              <NavContent items={navItems} className="flex items-center gap-1 mx-auto 2xl:gap-1.5" onNavigate={closeMobile} />
               <LanguageToggle className="shrink-0" />
               <Link href="/membership">
                 <Button className="text-base whitespace-nowrap" variant="default" pill>
@@ -474,7 +478,7 @@ export default function Menubar() {
           </div>
         </div>{/* ── .container ── */}
       </ScrollReveal>
-      <Overlay className="lg:hidden z-51" open={mobileOpen} onClose={closeMobile} />
+      <Overlay className="2xl:hidden z-51" open={mobileOpen} onClose={closeMobile} />
       <aside className={drawerStyle({ open: mobileOpen })} aria-hidden={!mobileOpen} >
         <nav className="flex flex-col flex-1 px-6 pt-10 pb-10">
           <NavContent items={navItems} className="flex flex-col flex-1 gap-1" onNavigate={closeMobile} />

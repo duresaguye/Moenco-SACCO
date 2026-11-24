@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import logo from "@/images/logo2x.png";
+import { useLocale } from "@/i18n/locale-context";
+import { ORG } from "@/config/sacco-config";
 
 export function Preloader() {
+  const { t } = useLocale();
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
   const [fadeOut, setFadeOut] = useState(false);
@@ -61,16 +62,10 @@ export function Preloader() {
       </div>
 
       <div className="relative z-10 flex flex-col items-center gap-8 max-w-xs w-full px-6">
-        {/* Brand Logo */}
-        <div className="relative">
-          <Image
-            src={logo}
-            alt="Solurax Logo"
-            width={302} height={72}
-            className="w-auto h-12 object-contain"
-            priority
-            loading="eager"
-          />
+        {/* Brand wordmark */}
+        <div className="relative flex items-center gap-2.5">
+          <span className="flex items-center justify-center size-12 rounded-full bg-primary text-white font-bold text-lg shrink-0">MS</span>
+          <span className="text-white font-bold text-lg">{t(ORG.shortName)}</span>
         </div>
 
         {/* Progress Bar & Counter */}

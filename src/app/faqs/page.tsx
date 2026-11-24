@@ -4,16 +4,19 @@ import PageHeader from "@/components/sections/page-header";
 import FaqsAll from "@/components/sections/faqs-all";
 
 export const metadata: Metadata = {
-  title: "Faqs",
-  description: "Solurax is a modern, responsive, and beautiful landing page template for solar and renewable energy technologies.",
+  title: "FAQ",
+  description: "Frequently asked questions about Moenco SACCO membership, savings, shares, and loans.",
 };
 
-export default function AboutPage() {
+export default function FaqsPage() {
   return (
     <React.Fragment>
-      <PageHeader heading="Faqs" breadcrumb={[{ href: '/', label: 'Home' }, { label: 'Faqs' }]} />
+      <PageHeader
+        heading={{ en: "Frequently Asked Questions", am: "ተደጋጋሚ ጥያቄዎች" }}
+        breadcrumb={[{ href: "/", label: { en: "Home", am: "መነሻ" } }, { label: { en: "FAQ", am: "ተደጋጋሚ ጥያቄዎች" } }]}
+      />
       <main className="relative flex flex-col justify-between overflow-x-hidden">
-        <FaqsAll />
+        <FaqsAll gap="top" />
       </main>
     </React.Fragment>
   );
