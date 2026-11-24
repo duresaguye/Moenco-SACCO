@@ -1,12 +1,14 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ShieldCheck, BuildingFill } from "@/components/icons";
-import shapeA from "@/images/decoration/shape-a.png";
-import lineA from "@/images/decoration/line-a.png";
+import heroAddis from "@/images/hero-addis.jpg";
+import heroAddisPark from "@/images/hero-addis-park.jpg";
+import heroAddisNight from "@/images/hero-addis-night.jpg";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { useLocale } from "@/i18n/locale-context";
 import { DICT } from "@/i18n/dictionary";
@@ -17,15 +19,43 @@ type HeroProps = {
   wrapperClassName?: string;
 };
 
+const HERO_IMAGES = [heroAddis, heroAddisPark, heroAddisNight];
+const SLIDE_DURATION_MS = 5000;
+
+function HeroBackground() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = setInterval(() => setIndex((i) => (i + 1) % HERO_IMAGES.length), SLIDE_DURATION_MS);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div className="absolute -top-(--menubar-height) inset-x-0 bottom-0 overflow-hidden -z-10">
+      {HERO_IMAGES.map((src, i) => (
+        <Image
+          key={i}
+          src={src}
+          alt=""
+          fill
+          priority={i === 0}
+          sizes="100vw"
+          className={cn("object-cover transition-opacity duration-[1500ms] ease-in-out", i === index ? "opacity-100" : "opacity-0")}
+        />
+      ))}
+      <div className="absolute inset-0 bg-linear-to-r from-darker via-darker/85 to-darker/40" />
+      <div className="absolute inset-0 bg-linear-to-t from-darker via-darker/10 to-transparent" />
+    </div>
+  );
+}
+
 export default function Hero({ className, wrapperClassName }: HeroProps) {
   const { t, locale } = useLocale();
 
   return (
     <header className={cn("relative flex flex-col pt-(--menubar-height)", className)}>
-      <div className="absolute -top-(--menubar-height) inset-x-0 bottom-0 pointer-events-none overflow-hidden -z-10 bg-linear-to-br from-darker via-dark to-primary-dark/70">
-        <Image src={shapeA} width={515} height={367} alt="" className="absolute top-0 inset-s-0 w-128.75 h-91.75 opacity-15" />
-        <Image src={lineA} width={348} height={373} alt="" className="absolute bottom-0 inset-e-0 w-87 h-93.25 opacity-15" />
-      </div>
+      <HeroBackground />
 
       <div className={cn("flex-1 flex items-center pt-24 md:pt-28 xl:pt-32 2xl:pt-36 pb-20 lg:pb-24 z-20 relative", wrapperClassName)}>
         <div className="container">

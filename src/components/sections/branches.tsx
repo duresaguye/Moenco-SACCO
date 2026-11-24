@@ -25,9 +25,6 @@ export default function Branches({ gap = "default", className }: BranchesProps) 
                 <h2 className="text-darker font-bold text-3xl lg:text-4xl leading-[1.166] mb-4">
                   {locale === "am" ? "ቅርንጫፎቻችን" : "Our Branches"}
                 </h2>
-                <p className="text-base leading-relaxed text-body">
-                  {locale === "am" ? "አድራሻና ስልክ ቁጥሮች እስኪረጋገጡ ድረስ ለጊዜው ባዶ ናቸው።" : "Addresses and phone numbers below are placeholders pending confirmation from each branch."}
-                </p>
               </ScrollReveal>
             </div>
           </div>
@@ -43,8 +40,8 @@ export default function Branches({ gap = "default", className }: BranchesProps) 
                     <Building className="size-5 fill-primary" />
                   </div>
                   <h5 className="font-semibold text-darker mb-2">{t(branch.name)}</h5>
-                  <p className="text-sm text-body mb-1">{t(branch.address)}</p>
-                  <p className="text-sm text-body">{branch.phone}</p>
+                  {branch.address.en !== "Address to be confirmed" && <p className="text-sm text-body mb-1">{t(branch.address)}</p>}
+                  {branch.phone !== "To confirm" && <p className="text-sm text-body">{branch.phone}</p>}
                 </ScrollReveal>
               </div>
             ))}

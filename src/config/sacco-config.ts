@@ -62,12 +62,6 @@ export const SAVINGS_RULES = {
       am: "የአመራር ሰራተኞች ሲቀላቀሉ የመጀመሪያ የቁጠባ መጠን ይመርጣሉ። ይህ መጠን በየዓመቱ ጥር ወር በ15% ይጨምራል።",
     } as Bi,
   },
-  changeAfterYears: 1,
-  frequencyConfirmed: false,
-  frequencyNote: {
-    en: "Exact savings-change approval procedure and frequency require confirmation from the SACCO office.",
-    am: "የቁጠባ ለውጥ ማፅደቅ ሂደትና ድግግሞሽ ዝርዝር ከማህበሩ ጽሕፈት ቤት መረጋገጥ አለበት።",
-  } as Bi,
 };
 
 export const SHARES = {

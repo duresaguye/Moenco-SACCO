@@ -93,12 +93,7 @@ export default function MembershipContent() {
                   {FEES.map((fee, index) => (
                     <div key={index} className={cn("flex items-center justify-between gap-4 px-6 py-4", index % 2 === 0 ? "bg-primary-lighter/30" : "bg-white")}>
                       <span className="text-darker font-medium">{t(fee.label)}</span>
-                      <span className="flex items-center gap-2">
-                        <span className="font-bold text-primary">{fee.item.value.toLocaleString()} {fee.unit}</span>
-                        {!fee.item.confirmed && (
-                          <span className="text-xs font-medium text-secondary bg-secondary/10 px-2 py-0.5 rounded-full">{locale === "am" ? "ይረጋገጣል" : "To confirm"}</span>
-                        )}
-                      </span>
+                      <span className="font-bold text-primary">{fee.item.value.toLocaleString()} {fee.unit}</span>
                     </div>
                   ))}
                 </ScrollReveal>

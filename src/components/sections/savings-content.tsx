@@ -7,7 +7,6 @@ import { WalletSaving, Coins, ShieldCheck } from "@/components/icons";
 import { useLocale } from "@/i18n/locale-context";
 import { SAVINGS_RULES, SHARES, MEMBERSHIP_FEES } from "@/config/sacco-config";
 import { previewSavings } from "@/lib/loan-calculator";
-import { DICT } from "@/i18n/dictionary";
 import { cn } from "@/lib/utils";
 
 export default function SavingsContent() {
@@ -50,9 +49,6 @@ export default function SavingsContent() {
                 </ScrollReveal>
               </div>
             </div>
-            <ScrollReveal delay={250} className="mt-8 bg-secondary/10 border border-secondary/30 rounded-xl p-5 text-sm text-darker">
-              {t(SAVINGS_RULES.frequencyNote)} <span className="font-semibold">({t(DICT.common.toConfirm)})</span>
-            </ScrollReveal>
           </div>
         </SectionContent>
       </Section>

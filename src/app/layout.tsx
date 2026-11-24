@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
-import { Noto_Sans_Ethiopic } from "next/font/google";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import { Preloader } from "@/components/ui/preloader";
 import { LocaleProvider } from "@/i18n/locale-context";
 import "@/css/globals.css";
-
-const notoSansEthiopic = Noto_Sans_Ethiopic({
-  subsets: ["ethiopic"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-noto-sans-ethiopic",
-  display: "swap",
-});
+// Self-hosted via @fontsource instead of next/font/google: the Google Fonts
+// CSS fetch at build time was unreliable (failed both locally and on
+// Vercel), so the Ethiopic weights are bundled as local static assets.
+import "@fontsource/noto-sans-ethiopic/ethiopic-400.css";
+import "@fontsource/noto-sans-ethiopic/ethiopic-500.css";
+import "@fontsource/noto-sans-ethiopic/ethiopic-600.css";
+import "@fontsource/noto-sans-ethiopic/ethiopic-700.css";
 
 export const metadata: Metadata = {
   title: {
@@ -28,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`h-full antialiased ${notoSansEthiopic.variable}`}>
+    <html lang="en" className="h-full antialiased">
       <body suppressHydrationWarning={true} className={`font-instrument-sans min-h-full flex flex-col text-body`}>
         <LocaleProvider>
           <Preloader />

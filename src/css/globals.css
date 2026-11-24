@@ -15,17 +15,16 @@
 
 @theme {
   --font-instrument-sans: Instrument Sans, sans-serif;
-  --font-noto-ethiopic: var(--font-noto-sans-ethiopic), Instrument Sans, sans-serif;
-  /* Neutral placeholder palette for a financial cooperative — swap for
-     Moenco's official brand colors once supplied. Deep teal/navy reads as
-     stable and trustworthy without the bright "solar" greens of the
-     original template. */
-  --color-primary: #0E6B4F;
-  --color-primary-lighter: #E7F3EE;
-  --color-primary-light: #1F9A72;
-  --color-primary-dark: #084D38;
-  --color-dark: #0B2E3B;
-  --color-darker: #071E27;
+  --font-noto-ethiopic: "Noto Sans Ethiopic", Instrument Sans, sans-serif;
+  /* Light-blue placeholder palette for a financial cooperative — swap for
+     Moenco's official brand colors once supplied. A clean, confident blue
+     reads as stable and trustworthy, paired with a warm gold accent. */
+  --color-primary: #1565D8;
+  --color-primary-lighter: #EAF2FD;
+  --color-primary-light: #5B9FF2;
+  --color-primary-dark: #0E4AA8;
+  --color-dark: #0E2A47;
+  --color-darker: #081A2E;
   --color-secondary: #C9992E;
   --color-body: #4B545D;
   --color-lighter: #E2E8F0;

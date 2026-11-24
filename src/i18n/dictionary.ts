@@ -41,7 +41,6 @@ export const DICT = {
       en: "This is an estimate for information purposes only and is not a loan offer.",
       am: "ይህ ለማብራሪያ ብቻ የሚያገለግል ግምት ነው እና የብድር ውሳኔ አያመለክትም።",
     } as Bi,
-    toConfirm: { en: "To confirm with the SACCO office", am: "ከማህበሩ ጽሕፈት ቤት ማረጋገጥ ይኖርበታል" } as Bi,
     etb: { en: "ETB", am: "ብር" } as Bi,
     perMonth: { en: "/ month", am: "/ በወር" } as Bi,
     months: { en: "months", am: "ወራት" } as Bi,

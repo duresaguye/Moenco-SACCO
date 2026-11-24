@@ -1,9 +1,11 @@
 "use client";
 import React from "react"
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { useLocale, type Bi } from "@/i18n/locale-context";
+import heroAddis from "@/images/hero-addis.jpg";
 
 interface BreadcrumbItemData {
     label: string | Bi;
@@ -27,7 +29,10 @@ export default function PageHeader({ heading, smallerHeading = false, breadcrumb
 
     return (
         <header className={cn("relative flex flex-col pt-(--menubar-height) bg-darker", className)}>
-            <div className="absolute inset-0 overflow-hidden -z-10 bg-linear-to-br from-darker via-dark to-primary-dark/60" />
+            <div className="absolute inset-0 overflow-hidden -z-10">
+                <Image src={heroAddis} alt="" fill sizes="100vw" className="object-cover opacity-25" />
+                <div className="absolute inset-0 bg-linear-to-br from-darker via-darker/95 to-primary-dark/70" />
+            </div>
             <div className="relative py-12 lg:py-20 xl:py-24">
                 <div className="container">
                     <ScrollReveal stagger className="flex flex-col items-center justify-center gap-4">
