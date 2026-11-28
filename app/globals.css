@@ -191,7 +191,22 @@ button { font: inherit; }
 .footer-disclaimer { max-width: 350px; text-align: right; }
 .preview-form { padding: clamp(22px, 3.5vw, 36px); border: 1px solid var(--line); background: var(--paper); }
 .member-preview-form { margin-top: 38px; }
-.contact-preview-form { max-width: 1240px; margin: 0 auto 38px; }
+.contact-page-section { padding-top: 88px; padding-bottom: 92px; }
+.contact-page-heading { max-width: 700px; margin-bottom: 32px; }
+.contact-page-heading .eyebrow { margin: 0 0 12px; }
+.contact-page-heading h2 { margin: 0 0 12px; color: var(--green); font-size: clamp(37px, 4.1vw, 54px); line-height: 1.08; font-weight: 500; letter-spacing: -.045em; }
+.contact-page-heading > p:last-child { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.8; }
+.contact-info-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.contact-info-card { min-height: 205px; padding: 25px; border: 1px solid var(--line); background: var(--paper); }
+.contact-info-icon { margin-bottom: 19px; color: var(--green); stroke-width: 1.6; }
+.contact-info-card h3 { margin: 0 0 9px; color: var(--green); font-size: 18px; font-weight: 600; }
+.contact-info-card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.75; }
+.contact-membership-callout { display: flex; justify-content: space-between; align-items: center; gap: 30px; margin-top: 16px; padding: 27px 29px; background: var(--green); }
+.contact-membership-callout .eyebrow { margin: 0 0 8px; color: var(--accent); }
+.contact-membership-callout h3 { margin: 0 0 7px; color: #fff; font-size: 22px; font-weight: 500; }
+.contact-membership-callout p:not(.eyebrow) { max-width: 590px; margin: 0; color: #fff; font-size: 14px; line-height: 1.7; }
+.contact-membership-callout .button { flex: 0 0 auto; background: var(--ivory); color: var(--green); }
+.contact-page-form { max-width: 1240px; margin: 44px auto 0; }
 .preview-form-heading { margin-bottom: 20px; }
 .preview-form-heading .eyebrow { margin: 0 0 8px; }
 .preview-form-heading h3 { margin: 0 0 8px; color: var(--green); font-size: clamp(23px, 2.5vw, 30px); font-weight: 500; letter-spacing: -.03em; }
@@ -343,7 +358,7 @@ button { font: inherit; }
   .loans { padding-top: 73px; padding-bottom: 76px; }.section-heading { display: block; margin-bottom: 27px; }.section-heading > p { margin-top: 15px; }.loan-grid { grid-template-columns: 1fr; }.loan-card { min-height: 0; padding: 22px 23px; }.loan-card-image { height: 205px; margin: -22px -23px 18px; }.loan-card + .loan-card { border-left: 0; border-top: 1px solid var(--line); }.loan-type { margin-top: 18px; }.loan-description { max-width: 400px; }.card-link { padding-top: 18px; }.loan-disclaimer { font-size: 11px; line-height: 1.6; }
   .membership { padding-top: 70px; padding-bottom: 68px; }.membership h2 { margin-top: 15px; }.steps-grid { grid-template-columns: 1fr; margin-top: 36px; border-top: 0; border-left: 1px solid #ffffff45; margin-left: 10px; }.member-step, .member-step + .member-step { min-height: 115px; padding: 0 0 24px 25px; border: 0; }.member-step:before { content: ''; position: absolute; left: -5px; top: 2px; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }.step-top { margin-bottom: 10px; }.step-count { font-size: 19px; }.step-check { width: 21px; height: 21px; }.member-step h3 { font-size: 16px; }.member-step > p { max-width: none; font-size: 14px; }.membership-bottom { flex-direction: column; gap: 13px; margin-top: 8px; }.why { grid-template-columns: 1fr; gap: 32px; padding-top: 76px; padding-bottom: 78px; }.why h2 { max-width: 440px; }.why-rule { margin-top: 22px; }.value-item { grid-template-columns: 27px 1fr 18px; gap: 10px; padding: 17px 0; }.value-item h3 { font-size: 16px; }.value-item p { font-size: 14px; }
   .final-cta { min-height: 360px; padding: 58px 7%; }.cta-inner h2 { font-size: clamp(41px,10vw,55px); }.cta-inner > p:not(.eyebrow) { font-size: 15px; }.cta-orbit { width: 260px; height: 260px; }.orbit-one { left: -210px; }.orbit-two { right: -210px; }
-  .footer { padding: 52px 7% 0; }.footer-main { grid-template-columns: 1fr 1fr; gap: 35px 25px; padding-bottom: 37px; }.contact-preview-form { margin-bottom: 27px; }.preview-form-fields { grid-template-columns: 1fr; gap: 14px; }.preview-field-wide, .preview-form-actions { grid-column: auto; }.footer-brand { grid-column: 1 / -1; }.footer-brand > p { max-width: 340px; }.footer-column h3 { margin-bottom: 5px; }.footer-bottom { min-height: 0; padding: 17px 0; display: grid; grid-template-columns: 1fr; gap: 11px; line-height: 1.6; }.footer-legal { margin: 0; }.footer-disclaimer { max-width: none; text-align: left; }
+  .footer { padding: 52px 7% 0; }.footer-main { grid-template-columns: 1fr 1fr; gap: 35px 25px; padding-bottom: 37px; }.contact-page-section { padding-top: 68px; padding-bottom: 70px; }.contact-info-grid { grid-template-columns: 1fr; }.contact-info-card { min-height: 0; }.contact-membership-callout { align-items: flex-start; flex-direction: column; padding: 24px; }.contact-membership-callout .button { align-self: flex-start; }.preview-form-fields { grid-template-columns: 1fr; gap: 14px; }.preview-field-wide, .preview-form-actions { grid-column: auto; }.footer-brand { grid-column: 1 / -1; }.footer-brand > p { max-width: 340px; }.footer-column h3 { margin-bottom: 5px; }.footer-bottom { min-height: 0; padding: 17px 0; display: grid; grid-template-columns: 1fr; gap: 11px; line-height: 1.6; }.footer-legal { margin: 0; }.footer-disclaimer { max-width: none; text-align: left; }
 }
 @media (max-width: 390px) {
   .announcement span:last-child { font-size: 10px; gap: 4px; }.brand { gap: 7px; }.nav-actions { gap: 8px; }.hero { min-height: 650px; }.hero h1 { font-size: 47px; }.hero-content { padding-bottom: 54px; }.hero-actions { gap: 13px; }.hero-actions .button { padding: 0 13px; }.text-link { font-size: 14px; }.flow-label { font-size: 14px; }.flow-step:not(:first-child) { padding-left: 9px; }.flow-connector { width: 15px; }

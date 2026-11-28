@@ -57,7 +57,7 @@ export function ContactForm({ language }: { language: Language }) {
     setSubmitted(true)
   }
 
-  return <section className="preview-form contact-preview-form" aria-labelledby="contact-form-heading">
+  return <section className="preview-form contact-page-form" aria-labelledby="contact-form-heading">
     <div className="preview-form-heading">
       <p className="eyebrow">{isEnglish ? 'CONTACT' : 'ያግኙን'}</p>
       <h3 id="contact-form-heading">{isEnglish ? 'How can we help?' : 'እንዴት ልንርዳዎት እንችላለን?'}</h3>
