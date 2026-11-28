@@ -27,7 +27,7 @@ const labels = {
 }
 
 function Brand() {
-  return <Link className="brand" href="/" aria-label="Moenco SACCO home"><span className="brand-mark"><span /></span><span className="brand-name">MOENCO <b>SACCO</b></span></Link>
+  return <Link className="brand" href="/" aria-label="Moenco SACCO home"><img className="brand-logo" src="/moenco-logo.webp" alt="MOENCO" /><span className="brand-sacco">SACCO</span></Link>
 }
 
 function NavDropdown({ label, id, openId, setOpenId, onNavigate, children }: { label: string; id: string; openId: string | null; setOpenId: (id: string | null) => void; onNavigate: () => void; children: React.ReactNode }) {
