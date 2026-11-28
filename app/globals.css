@@ -220,10 +220,12 @@ button { font: inherit; }
 .about-detail-image > img { object-fit: cover; }
 .principles { padding-top: 88px; padding-bottom: 92px; background: var(--background); }
 .principles h2 { max-width: 610px; margin-bottom: 38px; }
-.principle-grid { display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid var(--line); }
+.principle-grid { display: grid; grid-template-columns: repeat(3,1fr); position: relative; border-top: 1px solid var(--line); }
+.principle-connector { position: absolute; z-index: 0; top: 47px; left: 16.6667%; right: 16.6667%; height: 1px; transform-origin: left center; background: linear-gradient(90deg, var(--green), var(--accent)); }
+.principle-connector::after { content: ''; position: absolute; right: 0; top: -3px; width: 6px; height: 6px; border-top: 1px solid var(--accent); border-right: 1px solid var(--accent); transform: rotate(45deg); }
 .principle-item { min-height: 230px; position: relative; padding: 26px 30px 20px 0; }
 .principle-item + .principle-item { padding-left: 28px; border-left: 1px solid var(--line); }
-.principle-icon { display: grid; width: 42px; height: 42px; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--green); }
+.principle-icon { display: grid; position: relative; z-index: 1; width: 42px; height: 42px; margin: 0 auto; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--green); background: var(--background); }
 .principle-icon svg { width: 18px; height: 18px; stroke-width: 1.6; }
 .principle-number { position: absolute; top: 28px; right: 0; color: var(--muted); font-size: 12px; letter-spacing: .13em; }
 .principle-item h3 { margin: 28px 0 9px; color: var(--green); font-size: 16px; font-weight: 600; }
@@ -364,7 +366,9 @@ button { font: inherit; }
   .about-detail-image { min-height: 270px; }
   .principles, .savings-detail, .product-detail, .membership-request, .membership-faq, .news-resources, .news-faq { padding-top: 66px; padding-bottom: 68px; }
   .principle-grid { grid-template-columns: 1fr; }
+  .principle-connector { display: none; }
   .principle-item, .principle-item + .principle-item { min-height: 0; padding: 20px 0 22px; border-left: 0; border-bottom: 1px solid var(--line); }
+  .principle-icon { margin: 0; }
   .principle-number { top: 26px; }
   .principle-item h3 { margin-top: 17px; }
   .page-cta { min-height: 0; padding-top: 48px; padding-bottom: 48px; }
