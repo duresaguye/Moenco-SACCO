@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     images: ['/moenco-hero.png'],
   },
   icons: {
-    icon: '/icon.svg',
+    icon: '/moenco-favicon.png',
   },
 }
 
