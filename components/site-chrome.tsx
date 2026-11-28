@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight, ChevronDown, Menu, ShieldCheck, X } from 'lucide-react'
 import { LanguageProvider, useLanguage } from '@/components/language-context'
+import { ContactForm } from '@/components/preview-forms'
 
 const labels = {
   en: {
@@ -117,7 +118,7 @@ function SiteFooter() {
     <div className="footer-column"><h3>{c.explore}</h3><Link href="/about">{c.nav[1]}</Link><Link href="/membership">{c.nav[2]}</Link><Link href="/savings-loans#savings">{c.savings}</Link><Link href="/savings-loans#loans">{c.loans}</Link><Link href="/news">{c.nav[4]}</Link></div>
     <div className="footer-column"><h3>{c.resources}</h3><Link href="/membership#eligibility">{c.guidelines}</Link><Link href="/news#faq">{c.faq}</Link><Link href="/news#resources">{c.downloads}</Link></div>
     <div className="footer-column contact-column"><h3>{c.contact}</h3><p>{c.contactNote}</p><Link className="footer-contact-link" href="/membership">{c.member}<ArrowRight size={15} /></Link><span className="contact-pending">{c.notice}</span></div>
-  </div><div className="footer-bottom"><span>{c.copyright}</span><span className="footer-legal"><Link href="/news#privacy">{c.privacy}</Link><Link href="/news#terms">{c.terms}</Link></span></div></footer>
+  </div><ContactForm language={language} /><div className="footer-bottom"><span>{c.copyright}</span><span className="footer-legal"><Link href="/news#privacy">{c.privacy}</Link><Link href="/news#terms">{c.terms}</Link></span></div></footer>
 }
 
 function SiteFrame({ children }: { children: React.ReactNode }) {
