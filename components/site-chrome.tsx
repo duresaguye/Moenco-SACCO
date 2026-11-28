@@ -13,7 +13,7 @@ const labels = {
     member: 'Become a member', language: 'አማርኛ', savings: 'Savings', loans: 'Loan products', normal: 'Normal loan', material: 'Material loan', holiday: 'Holiday loan',
     faq: 'Frequently asked questions', downloads: 'Downloads & mobile app', explore: 'Explore', resources: 'Resources', contact: 'Get in touch',
     footer: 'A member-owned savings and credit cooperative supporting the financial wellbeing of Moenco employees.',
-    contactNote: 'Official contact details to be confirmed', guidelines: 'Membership guidelines', privacy: 'Privacy policy', terms: 'Terms & conditions', notice: 'Membership terms, application channels and contact details will be confirmed by Moenco SACCO.', copyright: '© 2026 Moenco SACCO. All rights reserved.',
+    contactNote: 'Official contact details to be confirmed', contactPageLink: 'Contact page', guidelines: 'Membership guidelines', privacy: 'Privacy policy', terms: 'Terms & conditions', notice: 'Membership terms, application channels and contact details will be confirmed by Moenco SACCO.', copyright: '© 2026 Moenco SACCO. All rights reserved.',
     announcement: 'Building financial wellbeing, together',
   },
   am: {
@@ -21,7 +21,7 @@ const labels = {
     member: 'አባል ይሁኑ', language: 'English', savings: 'ቁጠባ', loans: 'የብድር አይነቶች', normal: 'መደበኛ ብድር', material: 'የቁሳቁስ ብድር', holiday: 'የበዓል ብድር',
     faq: 'ተደጋጋሚ ጥያቄዎች', downloads: 'ማውረጃዎችና የሞባይል መተግበሪያ', explore: 'አሰሳ', resources: 'መረጃዎች', contact: 'ያግኙን',
     footer: 'የሞኤንኮ ሠራተኞችን የገንዘብ ደህንነት የሚደግፍ በአባላቱ የሚተዳደር የቁጠባና ብድር ማኅበር።',
-    contactNote: 'ይፋዊ የመገኛ መረጃ ይጠበቃል', guidelines: 'የአባልነት መመሪያ', privacy: 'የግላዊነት መመሪያ', terms: 'ውሎችና ሁኔታዎች', notice: 'የአባልነት ውሎች፣ የማመልከቻ መንገድና የመገኛ መረጃ በሞኤንኮ ሳኮ ይረጋገጣሉ።', copyright: '© 2026 ሞኤንኮ ሳኮ። መብቱ በሕግ የተጠበቀ ነው።',
+    contactNote: 'ይፋዊ የመገኛ መረጃ ይጠበቃል', contactPageLink: 'የመገኛ ገጽ', guidelines: 'የአባልነት መመሪያ', privacy: 'የግላዊነት መመሪያ', terms: 'ውሎችና ሁኔታዎች', notice: 'የአባልነት ውሎች፣ የማመልከቻ መንገድና የመገኛ መረጃ በሞኤንኮ ሳኮ ይረጋገጣሉ።', copyright: '© 2026 ሞኤንኮ ሳኮ። መብቱ በሕግ የተጠበቀ ነው።',
     announcement: 'የገንዘብ ደህንነትን በጋራ እንገንባ',
   },
 }
@@ -102,7 +102,7 @@ function SiteHeader() {
         <NavDropdown label={c.nav[5]} id="resources" openId={openDropdown} setOpenId={setOpenDropdown} onNavigate={closeMenu}>
           <Link href="/news#faq">{c.faq}</Link><Link href="/news#resources">{c.downloads}</Link>
         </NavDropdown>
-        <Link href="/#contact" onClick={closeMenu}>{c.nav[6]}</Link>
+        <Link href="/contact" onClick={closeMenu} aria-current={pathname === '/contact' ? 'page' : undefined}>{c.nav[6]}</Link>
         <div className="mobile-actions"><button className="language-button" onClick={toggleLanguage}>{c.language}</button><Link className="button button-primary" href="/membership" onClick={closeMenu}>{c.member}<ArrowRight size={16} /></Link></div>
       </nav>
       <div className="nav-actions"><button className="language-button" onClick={toggleLanguage} aria-label={language === 'en' ? 'Switch to Amharic' : 'ወደ እንግሊዝኛ ቀይር'}>{c.language}</button><Link className="button button-primary nav-cta" href="/membership">{c.member}<ArrowRight size={16} /></Link><button className="menu-toggle" aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-controls="primary-navigation" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</button></div>
@@ -113,10 +113,10 @@ function SiteHeader() {
 function SiteFooter() {
   const { language } = useLanguage()
   const c = labels[language]
-  return <footer className="footer" id="contact"><div className="footer-main"><div className="footer-brand"><Brand /><p>{c.footer}</p><span className="footer-note"><ShieldCheck size={14} /> MEMBER-OWNED · ETHIOPIA</span></div>
+  return <footer className="footer"><div className="footer-main"><div className="footer-brand"><Brand /><p>{c.footer}</p><span className="footer-note"><ShieldCheck size={14} /> MEMBER-OWNED · ETHIOPIA</span></div>
     <div className="footer-column"><h3>{c.explore}</h3><Link href="/about">{c.nav[1]}</Link><Link href="/membership">{c.nav[2]}</Link><Link href="/savings-loans#savings">{c.savings}</Link><Link href="/savings-loans#loans">{c.loans}</Link><Link href="/news">{c.nav[4]}</Link></div>
     <div className="footer-column"><h3>{c.resources}</h3><Link href="/membership#eligibility">{c.guidelines}</Link><Link href="/news#faq">{c.faq}</Link><Link href="/news#resources">{c.downloads}</Link></div>
-    <div className="footer-column contact-column"><h3>{c.contact}</h3><p>{c.contactNote}</p><Link className="footer-contact-link" href="/membership">{c.member}<ArrowRight size={15} /></Link><span className="contact-pending">{c.notice}</span></div>
+    <div className="footer-column contact-column"><h3>{c.contact}</h3><p>{c.contactNote}</p><Link className="footer-contact-link" href="/contact">{c.contactPageLink}<ArrowRight size={15} /></Link></div>
   </div><div className="footer-bottom"><span>{c.copyright}</span><span className="footer-legal"><Link href="/news#privacy">{c.privacy}</Link><Link href="/news#terms">{c.terms}</Link></span></div></footer>
 }
 

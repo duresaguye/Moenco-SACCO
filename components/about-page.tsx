@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Handshake, Landmark, ShieldCheck } from 'lucide-react'
+import { motion, useReducedMotion } from 'framer-motion'
 import { PageHero } from '@/components/page-hero'
 import { useLanguage } from '@/components/language-context'
 
@@ -29,12 +30,13 @@ const content = {
 
 export function AboutPage() {
   const { language } = useLanguage()
+  const reducedMotion = useReducedMotion()
   const c = content[language]
   const icons = [<Handshake key="hand" />, <Landmark key="landmark" />, <ShieldCheck key="shield" />]
   return <main lang={language}>
     <PageHero eyebrow={c.eyebrow} title={c.title} description={c.intro} image="/moenco-workplace.png" alt="Moenco colleagues collaborating in a modern Ethiopian workplace" />
     <section className="about-detail section-pad"><div className="about-detail-copy"><p className="eyebrow">{c.sectionEyebrow}</p><h2>{c.heading}</h2><p>{c.p1}</p><p>{c.p2}</p></div><div className="about-detail-image"><Image src="/moenco-hero.png" alt="Ethiopian professional in a bright Addis Ababa workplace" fill sizes="(max-width: 760px) 100vw, 48vw" /></div></section>
-    <section className="principles section-pad"><div className="section-heading"><div><p className="eyebrow">{c.principlesEyebrow}</p><h2>{c.principlesTitle}</h2></div></div><div className="principle-grid">{c.items.map(([title, text], i) => <article className="principle-item" key={title}><span className="principle-icon">{icons[i]}</span><span className="principle-number">0{i + 1}</span><h3>{title}</h3><p>{text}</p></article>)}</div></section>
+    <section className="principles section-pad"><div className="section-heading"><div><p className="eyebrow">{c.principlesEyebrow}</p><h2>{c.principlesTitle}</h2></div></div><div className="principle-grid"><motion.span className="principle-connector" initial={reducedMotion ? false : { scaleX: 0 }} whileInView={reducedMotion ? undefined : { scaleX: 1 }} viewport={{ once: true, amount: 0.3 }} transition={reducedMotion ? { duration: 0 } : { duration: 1.05, ease: 'easeInOut' }} aria-hidden="true" />{c.items.map(([title, text], i) => <motion.article className="principle-item" key={title} initial={reducedMotion ? false : { opacity: 0, y: 18 }} whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }} whileHover={reducedMotion ? undefined : { y: -4 }} viewport={{ once: true, amount: 0.25 }} transition={reducedMotion ? { duration: 0 } : { duration: 0.48, delay: i * 0.16, ease: 'easeOut' }}><motion.span className="principle-icon" initial={reducedMotion ? false : { scale: 0.78, rotate: -8 }} whileInView={reducedMotion ? undefined : { scale: 1, rotate: 0 }} viewport={{ once: true }} transition={reducedMotion ? { duration: 0 } : { type: 'spring', stiffness: 240, damping: 18, delay: i * 0.16 + 0.12 }} aria-hidden="true">{icons[i]}</motion.span><span className="principle-number">0{i + 1}</span><h3>{title}</h3><p>{text}</p></motion.article>)}</div></section>
     <section className="page-cta section-pad"><div><p className="eyebrow">MOENCO SACCO · MEMBERS FIRST</p><h2>{c.closeTitle}</h2><p>{c.closeText}</p></div><Link className="button button-primary" href="/membership">{c.cta}<ArrowRight size={16} /></Link></section>
   </main>
 }
